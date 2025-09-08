@@ -6,6 +6,7 @@
 
 ### システム要件
 - **Docker Desktop** (推奨)
+- **Git** (リポジトリのクローン用)
 - **macOS / Windows / Linux**
 - **ブラウザ** (Chrome, Firefox, Safari, Edge)
 
@@ -16,11 +17,17 @@
 
 ## 🚀 セットアップ手順
 
+### 0. リポジトリのクローン（初回のみ）
+```bash
+# GitHubからプロジェクトをクローン
+git clone [リポジトリURL]
+
+# プロジェクトディレクトリに移動
+cd betterWays
+```
+
 ### 1. プロジェクトの準備
 ```bash
-# プロジェクトフォルダに移動
-cd betterWays
-
 # ファイル構成確認
 ls -la
 # 以下のファイルがあることを確認：
@@ -71,12 +78,57 @@ OPENAI_API_KEY=your_openai_api_key_here
 ```bash
 # Docker Desktopが起動していることを確認
 
-# アプリケーションをビルド・起動
+# アプリケーションをビルド・起動（初回または更新時）
 docker-compose up --build
 
 # またはバックグラウンド起動
 docker-compose up --build -d
 ```
+
+**🎉 これで起動完了！**
+- **フロントエンド**: http://localhost:5173
+- **バックエンドAPI**: http://localhost:8000/health
+
+## 🔄 日常的な起動・停止
+
+### 2回目以降の起動
+```bash
+# 通常の起動（ビルド不要）
+docker-compose up
+
+# バックグラウンド起動
+docker-compose up -d
+```
+
+### 停止
+```bash
+# 停止
+docker-compose down
+
+# 完全停止（ボリュームも削除）
+docker-compose down --volumes
+```
+
+## 💻 ローカル開発環境（オプション）
+
+### VSCodeでの開発体験を向上させたい場合
+```bash
+# フロントエンドの依存関係をローカルにインストール
+cd frontend
+npm install
+
+# バックエンドの依存関係をローカルにインストール
+cd ../backend
+pip install -r requirements.txt
+```
+
+**メリット:**
+- VSCodeでコード補完が正常に動作
+- エラー表示がリアルタイムで表示  
+- IntelliSenseが使える
+- より高速なデバッグが可能
+
+**注意:** ローカル環境は開発体験向上のためのオプションです。アプリケーションの実行は引き続きDockerを使用してください。
 
 ### 5. 動作確認
 ブラウザで以下のURLにアクセス：
@@ -236,6 +288,7 @@ docker-compose down --volumes
 
 ### システム要件の再確認
 - Docker Desktop: 最新版
+- Git: 最新版
 - メモリ: 4GB以上推奨
 - ストレージ: 2GB以上の空き容量
 - ネットワーク: 安定したインターネット接続
