@@ -1,0 +1,18 @@
+# ベースとなるNode.jsのイメージを指定
+FROM node:20
+
+# 作業ディレクトリを作成
+WORKDIR /app
+
+# 最初にpackage.jsonなどをコピーして、依存関係をインストール
+COPY package*.json ./
+RUN npm ci
+
+# プロジェクトの全ファイルをコピー
+COPY . .
+
+# Viteが使用するポートを開放
+EXPOSE 5173
+
+# 開発サーバーを起動（コンテナ外からアクセスできるよう--host 0.0.0.0を追加）
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
