@@ -9,9 +9,19 @@ cp .env.example .env
 ```
 
 ### 2️⃣ Dockerで起動
+# 初回起動・コード変更時
 ```bash
 docker-compose up --build
 ```
+# 日常的な起動 2回目以降
+```bash
+docker-compose up
+```
+# トラブル時・完全リセット
+```bash
+docker-compose up --build --force-recreate
+```
+
 
 ### 3️⃣ ブラウザでアクセス
 http://localhost:5173
