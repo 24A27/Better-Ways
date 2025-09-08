@@ -1,0 +1,33 @@
+
+
+services:
+  # フロントエンドサービス
+  frontend:
+    build:
+      context: ./frontend  # Dockerfileがある場所
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/app    # ローカルのfrontendフォルダをコンテナの/appに同期
+      - /app/node_modules  # node_modulesは同期対象から除外
+    ports:
+      - "5173:5173"        # PCの5173ポートとコンテナの5173ポートを繋ぐ
+    tty: true              # コンテナを起動し続けるためのおまじない
+    stdin_open: true
+    env_file: # この行を追加
+      - .env   # .envファイルを読み込む
+
+
+  # バックエンドサービス
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+      
+    env_file: # この行を追加
+      - .env   # .envファイルを読み込む
+
+      # docker-compose.yml

@@ -1,0 +1,8 @@
+# IDE / Editor specific
+.vscode/
+.idea/
+
+# OS specific
+.DS_Store
+# .gitignoreの末尾に追加
+.env
